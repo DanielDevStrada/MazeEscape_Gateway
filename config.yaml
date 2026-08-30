@@ -8,3 +8,11 @@ model_list:
     litellm_params:
       model: gemini/gemini-1.5-pro
       api_key: os.environ/GEMINI_API_KEY
+
+
+  - model_name: auto-agent # 3. The Auto-Router
+    litellm_params:
+      model: routllm/mf
+      strong_model: gemini/gemini-1.5-pro
+      weak_model: ollama/llama3.1
+      routllm_threshold: 0.5      

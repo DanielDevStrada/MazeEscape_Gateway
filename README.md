@@ -11,40 +11,31 @@ This template is configured out-of-the-box to route standard OpenAI-formatted AP
 
 ---
 
-## 🛠️ Setup Instructions
+This template is configured out-of-the-box to route standard OpenAI-formatted API calls to either a local Ollama instance (for lightweight, zero-cost tasks) or Gemini 1.5 Pro (for complex reasoning). It is optimized for Visual Studio Code with a ready-to-use launch configuration.
+
+## 🛠️ Quick Start (Windows)
 
 ### 1. Create the Environment
-Open this folder in Visual Studio Code, open a new integrated terminal, and create a Python virtual environment to keep your system clean:
+Open this folder in Visual Studio Code, open a new terminal, and run the automated setup script. This will install Ollama, pull the Llama 3.1 model, create a Python virtual environment, and install the required routing packages.
 
 **Windows:**
-```bash
-python -m venv venv
-.\venv\Scripts\activate
+```powershell
+.\setup.ps1
 
-Mac/Linux:
+(Mac/Linux users: Manually install Ollama, run ollama pull llama3.1, then initialize a Python venv and run pip install -r requirements.txt).
 
-Bash
-python3 -m venv venv
-source venv/bin/activate
-2. Install LiteLLM
-With your virtual environment activated, install the proxy package:
-
-Bash
-pip install 'litellm[proxy]'
-3. Add Your Secrets securely
+2. Add Your Secrets securely
 Open the .env file and replace the placeholder with your actual Gemini API key:
-
-Plaintext
 GEMINI_API_KEY=your_real_key_here
 🔒 Crucial Git Step: If you are tracking this in your own Git repository, run this command before committing any changes to keep your API key hidden from Git while keeping the file in your repo structure:
-
 Bash
 git update-index --skip-worktree .env
-4. Run the Router
+
+3. 🚀 Run the Router
 In Visual Studio Code, just press F5.
 The launch.json is already configured to automatically load your .env variables and config.yaml settings. You will see the proxy spin up at http://0.0.0.0:4000.
 
-🚀 How to Use (Unity / C# Example)
+🎮 How to Use (Unity / C# Example)
 Once the router is running, you can send HTTP POST requests to http://localhost:4000/v1/chat/completions.
 
 Simply swap the "model" parameter to route your request. Based on the config.yaml:
@@ -55,7 +46,6 @@ Use "model": "expert-agent" -> Routes to Google Gemini 1.5 Pro
 
 Example Unity C# Request:
 
-C#
 string jsonPayload = @"{
     ""model"": ""local-agent"",
     ""messages"": [
