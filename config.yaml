@@ -1,18 +1,19 @@
 model_list:
-  - model_name: local-agent        # Use this name in Unity for easy tasks
+  - model_name: local-agent # Use this for easy tasks
     litellm_params:
       model: ollama/llama3.1
       api_base: http://localhost:11434
 
-  - model_name: expert-agent       # Use this name in Unity for complex tasks
+  - model_name: expert-agent  # Use this for complex tasks
     litellm_params:
       model: gemini/gemini-1.5-pro
       api_key: os.environ/GEMINI_API_KEY
 
-
-  - model_name: auto-agent # 3. The Auto-Router
+  - model_name: auto-agent
     litellm_params:
-      model: routllm/mf
-      strong_model: gemini/gemini-1.5-pro
-      weak_model: ollama/llama3.1
-      routllm_threshold: 0.5      
+      model: auto_router/complexity_router
+      complexity_router_config:
+        tiers:
+          SIMPLE: ["local-agent"]
+          COMPLEX: ["expert-agent", "local-agent"]
+        default_model: local-agent
