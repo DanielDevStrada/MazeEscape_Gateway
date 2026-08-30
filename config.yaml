@@ -1,0 +1,10 @@
+model_list:
+  - model_name: local-agent        # Use this name in Unity for easy tasks
+    litellm_params:
+      model: ollama/llama3.1
+      api_base: http://localhost:11434
+
+  - model_name: expert-agent       # Use this name in Unity for complex tasks
+    litellm_params:
+      model: gemini/gemini-1.5-pro
+      api_key: os.environ/GEMINI_API_KEY

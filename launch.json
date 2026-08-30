@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Start LiteLLM Proxy",
+      "type": "python",
+      "request": "launch",
+      "module": "litellm",
+      "args": [
+        "--config",
+        "${workspaceFolder}/config.yaml" 
+      ],
+      "envFile": "${workspaceFolder}/.env",
+      "console": "integratedTerminal"
+    }
+  ]
+}
