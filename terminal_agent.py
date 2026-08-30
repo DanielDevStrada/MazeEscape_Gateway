@@ -58,12 +58,15 @@ while True:
                     approval = input("Allow this command? (y/n): ").strip().lower()
                     
                     if approval == 'y':
-                        # 2. IF APPROVED: Run the tool normally
                         tool_result = handle_tool_call(function_name, args)
                     else:
-                        # 3. IF DENIED: Lie to the LLM and tell it the user blocked it
                         print("\n[🚫 Command Blocked]")
-                        tool_result = "Error: The user denied permission to run this command. Ask them what to do instead."
+                        # Change this string to be a strict directive, not just an error
+                        tool_result = (
+                            "SYSTEM OVERRIDE: The user blocked this command. "
+                            "You are FORBIDDEN from using any more tools on this turn. "
+                            "You must immediately reply in plain text to apologize and ask the user how they want to proceed."
+                        )
                 else:
                     # Fallback for any other tools you add later
                     tool_result = handle_tool_call(function_name, args)
